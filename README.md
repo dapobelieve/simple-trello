@@ -1,4 +1,4 @@
-# demo-vue
+# Multiple Image Uploader
 
 ## Project setup
 ```

@@ -2,9 +2,6 @@
   <div class="container">
     <div>
     	<uploader 
-    	:options="{
-    		baseUrl: 'http://localhost:3000/api'
-    	}"
     	:handlers="{
     		'video/mp4': {
     			endpoint: '/uploads/video'

@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<div class="relative h-20 w-20 mr-6">
 		<div class="absolute inset-0 flex items-center justify-center">
 			<span class="leading-tight text-sm text-blue-500 font-medium">{{ progress}}%</span>

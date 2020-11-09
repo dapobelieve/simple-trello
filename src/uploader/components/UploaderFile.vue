@@ -59,6 +59,26 @@ export default {
 			return (this.upload.file.size / 1000000).toFixed(2)
 		}
 	},
+	watch: {
+		'upload.queued' (queued) {
+			if(this.state == states.UNSUPPORTED) return;
+
+			if(!queued)
+				this.startUpload()
+		},
+		state(state) {
+			this.$emit('change', {
+				id: this.upload.id,
+				state
+			})
+		},
+		progress(progress) {
+			this.$emit('progress', {
+				id: this.upload.id,
+				progress,
+			})
+		}
+	},
 	methods: {
 		cancelUpload() {
 			this.axios.cancel()
@@ -99,8 +119,6 @@ export default {
 		}
 
 		this.state = states.WAITING
-
-		this.startUpload()
 	}
 }
 </script>

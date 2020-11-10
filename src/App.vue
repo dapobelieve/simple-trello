@@ -5,7 +5,12 @@
     	:handlers="{
     		'video/mp4': {
     			endpoint: '/uploads/video'
+    		},
+'image/*': {
+    			endpoint: '/uploads/video'
     		}
+
+
     	}" />
     </div>
   </div>

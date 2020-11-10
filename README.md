@@ -1,19 +1,22 @@
-# Multiple Image Uploader
+#  Multiple Image Uploader
 
-## Project setup
-```
-npm install
-```
+An advance image uploader component for uploading files built in Vue, You can configure 
+..* number of concurrent uploads,
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Installation
 
-### Compiles and minifies for production
-```
-npm run build
+Clone the repository and run 
+
+```bash
+pip install foobar
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Usage
+
+```python
+import foobar
+
+foobar.pluralize('word') # returns 'words'
+foobar.pluralize('goose') # returns 'geese'
+foobar.singularize('phenomena') # returns 'phenomenon'
+```

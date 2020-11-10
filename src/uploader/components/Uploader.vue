@@ -130,6 +130,7 @@ export default {
 			}))
 		},
 		getEndpointFor(fileType) {
+			console.log(fileType)
 			return get(this.handlers, [fileType, 'endpoint'], null)
 		}
 	},
@@ -143,7 +144,6 @@ export default {
 				queued[0].queued = false
 			}
 		}, 500)
-		
 	}
 }
 </script>

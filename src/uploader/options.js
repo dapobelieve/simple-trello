@@ -1,4 +1,4 @@
 export default {
-	baseUrl: 'http://localhost:3000/api',
+	baseUrl: 'https://reqres.in/api/users',
 	maxConcurrentUploads: 2
 }

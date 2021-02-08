@@ -1,5 +1,72 @@
 <template>
-	<div class="h-full bg-teal-300">
-		Lorem, ipsum, dolor sit amet consectetur adipisicing elit. Sunt voluptatum, aliquam cumque quia a excepturi rerum quidem, sequi fugit est perspiciatis eaque amet explicabo deserunt itaque soluta quisquam. Officiis exercitationem repudiandae, quas sapiente doloribus fugiat facilis repellat, nam autem hic optio eos consequuntur corrupti eveniet quisquam odio assumenda aperiam animi fuga, aliquid dolorum recusandae. Cupiditate velit asperiores blanditiis neque inventore consectetur maxime labore facilis nisi consequatur nulla, debitis error dolores, laborum eos saepe quia architecto omnis? Dicta obcaecati earum doloribus impedit inventore quo saepe minus dignissimos, quos id iste optio magnam possimus, perferendis at odio tempora vel porro. Sunt ipsam explicabo, ad, ut tempora ducimus voluptas fugit commodi assumenda aspernatur asperiores odit! Earum quaerat magni non itaque ex possimus explicabo doloremque. Explicabo tempora voluptatem molestiae odit? Nemo, quo. Delectus vel quas vitae, ratione! Quo, rem quidem ad vel odit, iure consequatur ab porro obcaecati, numquam error eveniet, perspiciatis aut necessitatibus incidunt assumenda odio nulla quos voluptate! Iusto ipsum mollitia dolorem maxime voluptatum alias animi culpa debitis nesciunt ex tempora, hic? Perspiciatis consequuntur, qui culpa. Unde ex, minima expedita inventore necessitatibus dolore cupiditate laudantium assumenda sapiente? Facere doloribus itaque voluptatum reiciendis perferendis veritatis saepe perspiciatis ut eos, non eius, sequi maxime.
+	<div class="board ">
+		<h4 class="mb-3">Believe</h4>
+		<div class="flex flex-row items-start">
+			<!--moveTask (event and the list of tasks of the column we want to move to)  -->
+			<BoardColumn
+				v-for="(column, $columnIndex) in board.columns" 
+				:key="$columnIndex"
+				:column="column"
+				:columnIndex="$columnIndex"
+				:board="board"
+				/>
+			
+			<div class="column flex">
+				<input 
+					class="p-2 mr-2 flex-grow" 
+					type="text" 
+					placeholder="New Column Name" 
+					@keyup.enter="createColumn"
+					v-model="newColumnName">
+			</div>
+		</div>
+		<div v-if="isTaskOpen" @click.self="close" class="task-bg">
+			<router-view />
+		</div>
 	</div>
 </template>
+<script>
+import {mapState} from "vuex"	
+import BoardColumn from "../components/BoardColumn"
+export default {
+	data () {
+		return {
+			newColumnName: ""
+		}
+	},
+	components: {
+		BoardColumn
+	},
+	computed: {
+		...mapState(['board']),
+		isTaskOpen() {
+			return this.$route.name === 'task'
+		}
+	},
+	methods: {
+		createColumn() {
+			if(this.newColumnName && this.newColumnName.trim() !== "") {
+				this.$store.commit('CREATE_COLUMN', {
+					name: this.newColumnName
+				})
+			}
+
+			this.newColumnName = ""
+		},
+		close() {
+			this.$router.push({name: 'board'})
+		}
+	}
+}	
+</script>
+<style lang="css">
+.board {
+	@apply p-4 bg-pink-300 h-full overflow-auto;
+}	
+
+
+.task-bg {
+  @apply absolute top-0 left-0 w-full h-full;
+  background: rgba(0,0,0,0.5);
+}
+</style>
